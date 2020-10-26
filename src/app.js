@@ -36,7 +36,7 @@ app.put("/repositories/:id", (request, response) => {
 
   const repoIndex = repositories.findIndex(repo => repo.id === id);
 
-  if(!repoIndex)
+  if(repoIndex < 0)
     return response.status(400).json({ msg: 'Invalid repositoty id' })
 
 
@@ -56,7 +56,7 @@ app.delete("/repositories/:id", (request, response) => {
 
   const repoIndex = repositories.findIndex(repo => repo.id === id);
 
-  if(!repoIndex)
+  if(repoIndex < 0)
     return response.status(400).json({ msg: 'Invalid repositoty id' })
 
   repositories.splice(repoIndex, 1);
@@ -69,14 +69,10 @@ app.post("/repositories/:id/like", (request, response) => {
 
   const repoIndex = repositories.findIndex(repo => repo.id === id);
 
-  if(!repoIndex)
+  if(repoIndex < 0)
     return response.status(400).json({ msg: 'Invalid repositoty id' })
 
-
-  if(!repoIndex)
-   return response.status(400).json({ msg: 'Invalid repositoty id' })
-
-  repositories[repoIndex].likes++;
+    repositories[repoIndex].likes++;
 
   return response.status(200).json(repositories[repoIndex])
 });
